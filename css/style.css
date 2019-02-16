@@ -1,21 +1,21 @@
 body {
   background: black;
   font-size: 16px;
-  font-family: 'SymbolaRegular' Monospace; 
-  font-weight: bold; 
-  font-style: normal;  
+  font-family: 'SymbolaRegular' Monospace;
+  font-weight: bold;
+  font-style: normal;
 }
 
 button {
   font-size: 16px;
-  font-family: 'SymbolaRegular' Monospace; 
-  font-weight: bold; 
+  font-family: 'SymbolaRegular' Monospace;
+  font-weight: bold;
   font-style: normal;
-  border-radius: 25px; 
+  border-radius: 25px;
 }
 
 #logoasciiart {
-  border-radius: 25px; 
+  border-radius: 25px;
   /* border: 2px solid orangered;*/
   width: 90%;
   text-align: center;
@@ -47,7 +47,7 @@ button {
     "h h h"
     "h h h"
     ;
-  place-items: center / center;
+  /* place-items: center / center;*/
 }
 
 #logoasciiart #hangman #h11 {
@@ -90,7 +90,7 @@ button {
 }
 
 #guessed_letters {
-  border-radius: 25px; 
+  border-radius: 25px;
   font-size: 18px;
   background: white;
   /* border: 2px solid orange;*/
@@ -101,7 +101,7 @@ button {
 }
 
 #clicked_letters {
-  border-radius: 25px; 
+  border-radius: 25px;
   font-size: 18px;
   background: orangered;
   /* border: 2px solid orange;*/
@@ -112,7 +112,7 @@ button {
 }
 
 #alphabet {
-  border-radius: 13px; 
+  border-radius: 13px;
   background: transparent;
   /* border: 2px solid orange; */
   width: 90%;
@@ -131,7 +131,7 @@ button {
 #control-panel {
   width: 90%;
   /* border: 2px solid orangered; */
-  border-radius: 25px; 
+  border-radius: 25px;
   display: grid;
   grid-template-areas:
     "b b"
