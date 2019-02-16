@@ -1,0 +1,120 @@
+var clickedData = "";
+var clickedButton = "";
+var clicked_letters = "";
+var penalize_same_letter = false;
+var lives = 9;
+var all_is_guessed = false;
+var strategy = "linear"; /* linear, boottomup, headfirst */
+
+var hangProgress = {
+    lives_rest: 9,
+    index:      0,    
+    linear:     ["h11", "h12", "h13", "h21", "h22", "h23", "h31", "h32", "h33"],  
+    boottomup:  ["h31", "h21", "h11", "h12", "h13", "h22", "h23", "h32", "h33"], 
+    headfirst:  ["h12", "h22", "h32", "h23", "h33", "h13", "h11", "h21", "h31"]  
+};
+
+function render_hungman () {
+    if (hangProgress.index >= 0 && hangProgress.index < 9) {
+        var tile_img = document.getElementById(hangProgress[strategy][hangProgress.index]);
+        tile_img.style.display = "block";
+    }
+}
+
+function take_life() {
+    hangProgress.lives_rest = hangProgress.lives_rest - 1;
+    hangProgress.index      = 9 - hangProgress.lives_rest;
+}
+
+function validate(form) {
+    var clicked = document.getElementById("clicked_letters");
+    if (clickedData == ' ') {
+        clickedData = '\u2423';
+    }
+    /* We update clicked_letters only if the letter has not been typed */
+    if (clicked_letters.indexOf(clickedData) === -1) {
+        clicked_letters = clicked_letters + clickedData;
+        clicked.innerText = clicked_letters;
+        console.log("Update: " + clicked_letters);
+        if (guess_right(clickedData)) {
+            /* We guessed the letter right so we update the clicked letters */
+            1 === 1;
+        } else {
+            render_hungman();
+            take_life();
+            if (hangProgress.lives_rest === 0 && !all_is_guessed ) {
+                alert("LOST! GAME OVER!!!");
+            }
+        }
+    } else {
+        if (penalize_same_letter) {
+            render_hungman();
+            take_life();
+            if (hangProgress.lives_rest === 0 && !all_is_guessed ) {
+                alert("LOST! GAME OVER!!!");
+            }
+        }
+    }
+    return true;
+}
+
+function clickedme(button) {
+    clickedData = button.value;
+    clickedButton = button.id;
+    console.log("Clicked: " + String(button.id) + " data: " + String(clickedData));
+    return true;
+}
+
+function init_hangman() {
+    var buttonsList = document.getElementById("alphabet");
+
+    var abcd = "abcdefghijklmnopqrstuvwxyz ";
+    var i = 0;
+    var newletc = "";
+    while (i < abcd.length) {
+        var buttonLabel = String(abcd.charAt(i));
+        var buttonId = "id"+String(abcd.charAt(i));
+        if (abcd.charAt(i) == ' ') {
+            buttonLabel = '\u2423';
+            buttonId = "spacebar";
+        }
+        newlet = "<button id=\"" + buttonId + "\" value=\"" + String(abcd.charAt(i));
+        newlet = newlet + "\" type=\"text\" onclick=\"clickedme(this)\">";
+        newlet = newlet + buttonLabel;
+        newlet = newlet + "</button>\r\n";
+        ///
+        i = i + 1;
+        // console.log(newlet);
+        newletc += newlet;
+    }
+    // console.log(newletc);
+    buttonsList.innerHTML = newletc;
+
+    console.log("STEP HANGMAN STARTED");
+}
+
+function guess_right() {
+    return false;
+}
+
+function new_game() {
+    reset_game();
+    location.reload();
+}
+
+function reset_game() {
+    hangProgress.index      = 0;
+    hangProgress.lives_rest = 9;
+    clicked_letters         = "";
+    var clicked             = document.getElementById("clicked_letters");
+    clicked.innerText       = clicked_letters;   
+}
+
+function panelclick(button) {
+    if (button.value == "reset") {
+        reset_game();
+    }
+    if (button.value == "new-game") {        
+        new_game();
+    }
+}

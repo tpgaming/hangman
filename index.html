@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>A Pen by Radovan Chytracek</title>
+    <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/symbola" type="text/css"/>
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>STEP HANGMAN</title>
+    </head>
+
+    <body onload="init_hangman()">
+        <div id="logoasciiart">
+            <div id="logoart">
+                <img id="logoimg" src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/198246/hangman.png' alt=''>
+            </div>
+            <div id="hangman">
+                <img src="assets/11.png" id="h11" />
+                <img src="assets/12.png" id="h12" />
+                <img src="assets/13.png" id="h13" />
+                <img src="assets/21.png" id="h21" />
+                <img src="assets/22.png" id="h22" />
+                <img src="assets/23.png" id="h23" />
+                <img src="assets/31.png" id="h31" />
+                <img src="assets/32.png" id="h32" />
+                <img src="assets/33.png" id="h33" />
+            </div>
+        </div>
+        <div id="guessed_letters">
+            <!-- The Text will be entered by clicking buttons -->
+        </div>
+        <div id="clicked_letters">
+            <!-- The Text will be entered by clicking buttons -->
+        </div>
+        <form id="hangman-input" onsubmit="validate(this); return false">
+            <div id="alphabet">
+                <!-- <button onclick="checkLetter()">Click me</button> -->
+            </div>
+        </form>
+        <div id="control-panel">
+            <button id="reset" value="reset" type="text" onclick="panelclick(this)">
+                Reset
+            </button>
+            <button id="new-game" value="new-game" type="text" onclick="panelclick(this)">
+                New Game
+            </button>
+        </div>
+    </body>
+
+    </html>
+
+    <script src="js/index.js"></script>
+
+
+
+
+</body>
+
+</html>
