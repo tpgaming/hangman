@@ -1,18 +1,30 @@
 var clickedData = "";
 var clickedButton = "";
 var clicked_letters = "";
-var penalize_same_letter = false;
+var penalize_same_letter = true;
 var lives = 9;
 var all_is_guessed = false;
 var strategy = "linear"; /* linear, boottomup, headfirst */
 
 var hangProgress = {
     lives_rest: 9,
-    index:      0,    
-    linear:     ["h11", "h12", "h13", "h21", "h22", "h23", "h31", "h32", "h33"],  
-    boottomup:  ["h31", "h21", "h11", "h12", "h13", "h22", "h23", "h32", "h33"], 
-    headfirst:  ["h12", "h22", "h32", "h23", "h33", "h13", "h11", "h21", "h31"]  
+    index:      0,
+    linear:     ["h11", "h12", "h13", "h21", "h22", "h23", "h31", "h32", "h33"],
+    boottomup:  ["h31", "h21", "h11", "h12", "h13", "h22", "h23", "h32", "h33"],
+    headfirst:  ["h12", "h22", "h32", "h23", "h33", "h13", "h11", "h21", "h31"]
 };
+
+function handle_form_reset(form) {
+  alert("LOST! GAME OVER!!!");
+  new_game();
+}
+
+function validate(form) {
+  if (hangProgress.lives_rest === 0 && !all_is_guessed ) {
+      form.reset();
+  }
+}
+
 
 function render_hungman () {
     if (hangProgress.index >= 0 && hangProgress.index < 9) {
@@ -26,7 +38,11 @@ function take_life() {
     hangProgress.index      = 9 - hangProgress.lives_rest;
 }
 
-function validate(form) {
+function clickedme(button) {
+    clickedData = button.value;
+    clickedButton = button.id;
+    console.log("Clicked: " + String(button.id) + " data: " + String(clickedData));
+
     var clicked = document.getElementById("clicked_letters");
     if (clickedData == ' ') {
         clickedData = '\u2423';
@@ -42,26 +58,14 @@ function validate(form) {
         } else {
             render_hungman();
             take_life();
-            if (hangProgress.lives_rest === 0 && !all_is_guessed ) {
-                alert("LOST! GAME OVER!!!");
-            }
         }
     } else {
         if (penalize_same_letter) {
             render_hungman();
             take_life();
-            if (hangProgress.lives_rest === 0 && !all_is_guessed ) {
-                alert("LOST! GAME OVER!!!");
-            }
         }
     }
-    return true;
-}
 
-function clickedme(button) {
-    clickedData = button.value;
-    clickedButton = button.id;
-    console.log("Clicked: " + String(button.id) + " data: " + String(clickedData));
     return true;
 }
 
@@ -107,14 +111,14 @@ function reset_game() {
     hangProgress.lives_rest = 9;
     clicked_letters         = "";
     var clicked             = document.getElementById("clicked_letters");
-    clicked.innerText       = clicked_letters;   
+    clicked.innerText       = clicked_letters;
 }
 
 function panelclick(button) {
     if (button.value == "reset") {
         reset_game();
     }
-    if (button.value == "new-game") {        
+    if (button.value == "new-game") {
         new_game();
     }
 }
