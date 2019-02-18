@@ -1,14 +1,14 @@
 body {
     background: black;
     font-size: 16px;
-    font-family: 'SymbolaRegular' Monospace;
+    font-family: 'SymbolaRegular';
     font-weight: bold;
     font-style: normal;
 }
 
 button {
     font-size: 16px;
-    font-family: 'SymbolaRegular' Monospace;
+    font-family: 'SymbolaRegular';
     font-weight: bold;
     font-style: normal;
     border-radius: 25px;
@@ -22,7 +22,6 @@ button {
     display: grid;
     grid-template-areas: "image";
     justify-content: center;
-    place-items: center / center;
     position: relative;
 }
 
@@ -46,12 +45,12 @@ button {
     /* GRID STYLE */
     display: grid;
     grid-template-areas: "h h h" "h h h" "h h h";
-    place-items: center / center;
 }
 
 #logoasciiart #hangman #h11 {
     z-index: 1;
-    display: none;
+    visibility: hidden;
+    display: block;
     border: orange dotted 1px;
     width: 51px;
     grid-column-start: 1;
@@ -62,7 +61,8 @@ button {
 
 #logoasciiart #hangman #h12 {
     z-index: 1;
-    display: none;
+    visibility: hidden;
+    display: block;
     border: orange dotted 1px;
     width: 51px;
     grid-column-start: 2;
@@ -73,7 +73,8 @@ button {
 
 #logoasciiart #hangman #h13 {
     z-index: 1;
-    display: none;
+    visibility: hidden;
+    display: block;
     border: orange dotted 1px;
     width: 51px;
     grid-column-start: 3;
@@ -87,7 +88,8 @@ button {
 
 #logoasciiart #hangman #h21 {
     z-index: 1;
-    display: none;
+    visibility: hidden;
+    display: block;
     border: orange dotted 1px;
     width: 51px;
     grid-column-start: 1;
@@ -98,7 +100,8 @@ button {
 
 #logoasciiart #hangman #h22 {
     z-index: 1;
-    display: none;
+    visibility: hidden;
+    display: block;
     border: orange dotted 1px;
     width: 51px;
     grid-column-start: 2;
@@ -109,7 +112,8 @@ button {
 
 #logoasciiart #hangman #h23 {
     z-index: 1;
-    display: none;
+    visibility: hidden;
+    display: block;
     border: orange dotted 1px;
     width: 51px;
     grid-column-start: 3;
@@ -123,7 +127,8 @@ button {
 
 #logoasciiart #hangman #h31 {
     z-index: 1;
-    display: none;
+    visibility: hidden;
+    display: block;
     border: orange dotted 1px;
     width: 51px;
     grid-column-start: 1;
@@ -134,7 +139,8 @@ button {
 
 #logoasciiart #hangman #h32 {
     z-index: 1;
-    display: none;
+    visibility: hidden;
+    display: block;
     border: orange dotted 1px;
     width: 51px;
     grid-column-start: 2;
@@ -145,13 +151,56 @@ button {
 
 #logoasciiart #hangman #h33 {
     z-index: 1;
-    display: none;
+    visibility: hidden;
+    display: block;
     border: orange dotted 1px;
     width: 51px;
     grid-column-start: 3;
     grid-column-end: 3;
     grid-row-start: 3;
     grid-row-end: 3;
+}
+
+#dashboard {
+    width: 90%;
+    background-color: transparent;
+    /* GRID STYLE */
+    display: grid;
+    grid-template-areas: "h h h h h h h";
+}
+
+#dashboard #lives {
+    color: black;
+    font-size: 16px;
+    font-family: 'SymbolaRegular';
+    font-weight: bold;
+    font-style: normal;
+    text-align: center;
+    border-radius: 25px;
+    background-color: greenyellow;
+    grid-column-start: 1;
+    grid-column-end: 1;
+}
+
+#dashboard #infomsg {
+    color: orangered;
+    text-align: center;
+    font-size: 18px;
+    background-color: black;
+    grid-column-start: 2;
+    grid-column-end: span 5;
+}
+
+#dashboard #timing {
+    font-size: 16px;
+    font-family: 'SymbolaRegular';
+    font-weight: bold;
+    font-style: normal;
+    text-align: center;
+    border-radius: 25px;
+    background-color: whitesmoke;
+    grid-column-start: 7;
+    grid-column-end: 7;
 }
 
 #guessed_letters {
