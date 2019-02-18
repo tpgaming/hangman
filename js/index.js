@@ -1,3 +1,6 @@
+const country_data="https://s3-us-west-2.amazonaws.com/s.cdpn.io/198246/countries.json";
+const cities_data = "https://s3-us-west-2.amazonaws.com/s.cdpn.io/198246/cities.json";
+
 let clickedData = "";
 let clickedButton = "";
 let clicked_letters = "";
