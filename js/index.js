@@ -154,6 +154,7 @@ function reset_game() {
     hide_hangman_tiles();
     render_lives();
     game_is_over = false;
+    sec = 0;
 }
 
 function panelclick(button) {
