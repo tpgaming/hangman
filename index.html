@@ -38,13 +38,18 @@
                 <img src="assets/33.png" id="h33" />
             </div>
         </div>
+        <div id="dashboard">
+            <div id="lives"></div>
+            <div id="infomsg"></div>
+            <div id="timing"></div>
+        </div>
         <div id="guessed_letters">
             <!-- The Text will be entered by clicking buttons -->
         </div>
         <div id="clicked_letters">
             <!-- The Text will be entered by clicking buttons -->
         </div>
-        <form id="hangman-input" onsubmit="validate(this); return false">
+        <form id="hangman-input" onreset="handle_form_reset();return false" onsubmit="validate(this); return false">
             <div id="alphabet">
                 <!-- <button onclick="checkLetter()">Click me</button> -->
             </div>
