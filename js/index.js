@@ -14,9 +14,17 @@ var hangProgress = {
     headfirst:  ["h12", "h22", "h32", "h23", "h33", "h13", "h11", "h21", "h31"]
 };
 
+/* Timing */
+var sec = 0;
+function pad ( val ) { return val > 9 ? val : "0" + val; }
+setInterval( function() {
+    var label = pad(parseInt(sec/60,10)) + ":" + pad(++sec%60);
+    document.getElementById("timing").innerText=label;
+  }, 1000);
+
 function handle_form_reset(form) {
-  alert("LOST! GAME OVER!!!");
-  new_game();
+  var tile_lives = document.getElementById("infomsg");
+  tile_lives.innerText = "YOU LOST! GAME OVER!!!";
 }
 
 function validate(form) {
@@ -25,8 +33,14 @@ function validate(form) {
   }
 }
 
+function render_lives() {
+  var tile_lives = document.getElementById("lives");
+  tile_lives.innerText = parseInt(hangProgress.lives_rest);
+}
 
 function render_hungman () {
+    render_lives();
+
     if (hangProgress.index >= 0 && hangProgress.index < 9) {
         var tile_img = document.getElementById(hangProgress[strategy][hangProgress.index]);
         tile_img.style.display = "block";
@@ -93,6 +107,8 @@ function init_hangman() {
     }
     // console.log(newletc);
     buttonsList.innerHTML = newletc;
+
+    render_lives();
 
     console.log("STEP HANGMAN STARTED");
 }

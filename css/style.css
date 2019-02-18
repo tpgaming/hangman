@@ -89,6 +89,46 @@ button {
   grid-column-start: 3; grid-column-end: 3; grid-row-start: 3; grid-row-end: 3;
 }
 
+#dashboard {
+  width: 90%;
+  background-color: transparent;
+
+  /* GRID STYLE */
+  display: grid;
+  grid-template-areas:
+    "h h h h h h h"
+    ;
+}
+
+#dashboard #lives {
+  color: black;
+  font-size: 16px;
+  font-family: 'SymbolaRegular' Monospace;
+  font-weight: bold;
+  font-style: normal;
+  text-align: center;
+  border-radius: 25px;
+  background-color: greenyellow;
+  grid-column-start: 1; grid-column-end: 1;
+}
+#dashboard #infomsg {
+  color: orangered;
+  text-align: center;
+  font-size: 18px;
+  background-color: black;
+  grid-column-start: 2; grid-column-end: span 5;
+}
+#dashboard #timing {
+  font-size: 16px;
+  font-family: 'SymbolaRegular' Monospace;
+  font-weight: bold;
+  font-style: normal;
+  text-align: center;
+  border-radius: 25px;
+  background-color: whitesmoke;
+  grid-column-start: 7; grid-column-end: 7;
+}
+
 #guessed_letters {
   border-radius: 25px;
   font-size: 18px;
