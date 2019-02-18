@@ -4,8 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>A Pen by Radovan Chytracek</title>
-    <link rel="stylesheet" media="screen"
-          href="https://fontlibrary.org/face/symbola" type="text/css"/>
+    <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/symbola" type="text/css" />
     <link rel="stylesheet" href="css/style.css">
 
 </head>
@@ -39,17 +38,13 @@
                 <img src="assets/33.png" id="h33" />
             </div>
         </div>
-        <div id="dashboard">
-            <div id="lives"></div>
-            <div id="infomsg"></div>
-            <div id="timing"></div>
-        </div>
         <div id="guessed_letters">
+            <!-- The Text will be entered by clicking buttons -->
         </div>
         <div id="clicked_letters">
             <!-- The Text will be entered by clicking buttons -->
         </div>
-        <form id="hangman-input" onreset="handle_form_reset();return false"  onsubmit="validate(this); return false">
+        <form id="hangman-input" onsubmit="validate(this); return false">
             <div id="alphabet">
                 <!-- <button onclick="checkLetter()">Click me</button> -->
             </div>
@@ -57,6 +52,9 @@
         <div id="control-panel">
             <button id="reset" value="reset" type="text" onclick="panelclick(this)">
                 Reset
+            </button>
+            <button id="options" value="options" type="text" onclick="panelclick(this)">
+                Options
             </button>
             <button id="new-game" value="new-game" type="text" onclick="panelclick(this)">
                 New Game
