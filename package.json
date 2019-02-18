@@ -1,0 +1,26 @@
+{
+  "name": "hangman",
+  "version": "1.0.0",
+  "description": "JavaScript Learning Game of Hangman",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tpgaming/hangman.git"
+  },
+  "keywords": [
+    "hangman"
+  ],
+  "author": "TP Gaming",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/tpgaming/hangman/issues"
+  },
+  "homepage": "https://github.com/tpgaming/hangman#readme",
+  "devDependencies": {
+    "eslint": "^5.14.1",
+    "eslint-config-google": "^0.12.0"
+  }
+}
