@@ -19,6 +19,7 @@ let lives = 9;
 let all_is_guessed = false;
 let game_is_over = false;
 let strategy = "bottomup"; /* linear, bottomup, headfirst */
+let mainWord = "hehe";
 
 let hangProgress = {
     lives_rest: 9,
@@ -28,7 +29,7 @@ let hangProgress = {
     headfirst: ["h12", "h22", "h32", "h23", "h33", "h13", "h11", "h21", "h31"]
 };
 
-let game_options = {
+let game_options_state = {
     strategy: "linear"
 };
 
@@ -104,9 +105,10 @@ function clickedme(button) {
         clicked_letters = clicked_letters + clickedData;
         clicked.innerText = clicked_letters;
         console.log("Update: " + clicked_letters);
-        if (guess_right(clickedData)) {
-            /* We guessed the letter right so we update the clicked letters */
-            console.log("TODO: Update function after the correct guess");
+        let guess_result = guess_right(clickedData);
+        if (guess_result[0]) {
+            /* We guessed the letter right so we update the guessed_letters */
+            update_guessed_letters(guess_result[1]);
         } else {
             take_life();
             render_hungman();
@@ -119,6 +121,20 @@ function clickedme(button) {
     }
 
     return true;
+}
+
+/* Taken from: https://gist.github.com/efenacigiray/9367920.js" */
+function replaceAt(string, index, replace) {
+  return string.substring(0, index) + replace + string.substring(index + 1);
+}
+
+function update_guessed_letters(index) {
+    let el = document.getElementById("guessed_letters");
+    let dotword = el.innerText;
+    for(let i = 0; i<index.length; i++) {
+        dotword = replaceAt(dotword, index[i], clickedData);
+    }
+    el.innerText = dotword;
 }
 
 function init_hangman() {
@@ -147,12 +163,21 @@ function init_hangman() {
     buttonsList.innerHTML = newletc;
 
     render_lives();
-    render_word("hehe");
+    render_word(mainWord);
     console.log("HANGMAN STARTED");
 }
 
-function guess_right() {
-    return false;
+function guess_right(letter) {
+    let indexes = [];
+    let currentIndex = 0;
+    while ((currentIndex=mainWord.indexOf(letter, currentIndex)) !== -1) {
+        indexes.push(currentIndex);
+        currentIndex = currentIndex+1;
+    }
+    if ( indexes.length === 0 ) {
+        return [false,[]];  
+    }
+    return [true, indexes];
 }
 
 function game_options() {
