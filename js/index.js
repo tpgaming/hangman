@@ -154,6 +154,8 @@ function reset_game() {
     clicked_letters = "";
     let clicked = document.getElementById("clicked_letters");
     clicked.innerText = clicked_letters;
+    let tile_lives = document.getElementById("infomsg");
+    tile_lives.innerText = "";
     hide_hangman_tiles();
     render_lives();
     game_is_over = false;
