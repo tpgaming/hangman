@@ -1,3 +1,13 @@
+var words = [
+  "Step",
+  "Academy",
+  "Minecraft",
+  "Lego",
+  "Air",
+  "Stone",
+  "themeatly artist makes games comic"
+];
+
 const country_data="https://s3-us-west-2.amazonaws.com/s.cdpn.io/198246/countries.json";
 const cities_data = "https://s3-us-west-2.amazonaws.com/s.cdpn.io/198246/cities.json";
 
@@ -8,7 +18,7 @@ let penalize_same_letter = true;
 let lives = 9;
 let all_is_guessed = false;
 let game_is_over = false;
-let strategy = "bottomup"; /* linear, boottomup, headfirst */
+let strategy = "bottomup"; /* linear, bottomup, headfirst */
 
 let hangProgress = {
     lives_rest: 9,
@@ -16,6 +26,22 @@ let hangProgress = {
     linear: ["h11", "h12", "h13", "h21", "h22", "h23", "h31", "h32", "h33"],
     bottomup: ["h31", "h21", "h11", "h12", "h13", "h22", "h23", "h32", "h33"],
     headfirst: ["h12", "h22", "h32", "h23", "h33", "h13", "h11", "h21", "h31"]
+};
+
+let game_options = {
+    strategy: "linear"
+};
+
+function render_word(word) {
+    let length=word.length;
+    let i = 0;
+    let dots = "";
+    while(i<length) {
+        dots = dots+".";
+        i = i + 1;
+    };
+    let el = document.getElementById("guessed_letters");
+    el.innerText = dots;
 };
 
 /* Timing */
@@ -121,7 +147,7 @@ function init_hangman() {
     buttonsList.innerHTML = newletc;
 
     render_lives();
-
+    render_word("hehe");
     console.log("HANGMAN STARTED");
 }
 
@@ -160,6 +186,7 @@ function reset_game() {
     render_lives();
     game_is_over = false;
     sec = 0;
+  
 }
 
 function panelclick(button) {
