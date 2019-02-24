@@ -22,6 +22,7 @@ let strategy = "bottomup"; /* linear, bottomup, headfirst */
 let mainWord = "hehe";
 
 let hangProgress = {
+    guesses_to_go: 0,
     lives_rest: 9,
     index: 0,
     linear: ["h11", "h12", "h13", "h21", "h22", "h23", "h31", "h32", "h33"],
@@ -35,6 +36,8 @@ let game_options_state = {
 
 function render_word(word) {
     let length=word.length;
+    /* Record how many letters to be guessed */
+    hangProgress.guesses_to_go = length;
     let i = 0;
     let dots = "";
     while(i<length) {
@@ -55,15 +58,27 @@ setInterval(function() {
 }, 1000);
 
 function handle_form_reset(form) {
-    game_is_over = true;
-    let tile_lives = document.getElementById("infomsg");
-    tile_lives.innerText = "YOU LOST! GAME OVER!!!";
+    if (all_is_guessed) {
+      let tile_lives = document.getElementById("infomsg");
+      tile_lives.innerText = "YOU WON!!!";
+    } else {
+      if (game_is_over) {
+          let tile_lives = document.getElementById("infomsg");
+          tile_lives.innerText = "YOU LOST! GAME OVER!!!";
+      }
+    }
 }
 
 function validate(form) {
-    if (hangProgress.lives_rest === 0 && !all_is_guessed && !game_is_over) {
-        form.reset();
+    if (all_is_guessed) {
+        /* Player WON! */
+        ;
+    } else {
+        if (hangProgress.lives_rest === 0 && !game_is_over) {
+            game_is_over = true;
+        }
     }
+    form.reset();
 }
 
 function render_lives() {
@@ -89,7 +104,7 @@ function take_life() {
 }
 
 function clickedme(button) {
-    if (game_is_over) {
+    if (game_is_over || all_is_guessed) {
         return false;
     }
     clickedData = button.value;
@@ -100,23 +115,29 @@ function clickedme(button) {
     if (clickedData == ' ') {
         clickedData = '\u2423';
     }
-    /* We update clicked_letters only if the letter has not been typed */
-    if (clicked_letters.indexOf(clickedData) === -1) {
-        clicked_letters = clicked_letters + clickedData;
-        clicked.innerText = clicked_letters;
-        console.log("Update: " + clicked_letters);
-        let guess_result = guess_right(clickedData);
-        if (guess_result[0]) {
-            /* We guessed the letter right so we update the guessed_letters */
-            update_guessed_letters(guess_result[1]);
+
+    if (!game_is_over && !all_is_guessed) {
+        /* We update clicked_letters only if the letter has not been typed */
+        if (clicked_letters.indexOf(clickedData) === -1) {
+            clicked_letters = clicked_letters + clickedData;
+            clicked.innerText = clicked_letters;
+            console.log("Update: " + clicked_letters);
+            let guess_result = guess_right(clickedData);
+                if (guess_result[0]) {
+                    /* We guessed the letter right so we update the guessed_letters */
+                    update_guessed_letters(guess_result[1]);
+                    if (hangProgress.guesses_to_go === 0 ) {
+                      all_is_guessed = true;
+                    }
+                } else {
+                    take_life();
+                    render_hungman();
+                }
         } else {
-            take_life();
-            render_hungman();
-        }
-    } else {
-        if (penalize_same_letter) {
-            take_life();
-            render_hungman();
+            if (penalize_same_letter) {
+                take_life();
+                render_hungman();
+            }
         }
     }
 
@@ -133,6 +154,9 @@ function update_guessed_letters(index) {
     let dotword = el.innerText;
     for(let i = 0; i<index.length; i++) {
         dotword = replaceAt(dotword, index[i], clickedData);
+        if(hangProgress.guesses_to_go > 0) {
+          hangProgress.guesses_to_go = hangProgress.guesses_to_go - 1;
+        }
     }
     el.innerText = dotword;
 }
@@ -202,6 +226,9 @@ function hide_hangman_tiles() {
 function reset_game() {
     hangProgress.index = 0;
     hangProgress.lives_rest = 9;
+    hangProgress.guesses_to_go = 0;
+    game_is_over = false;
+    all_is_guessed = false;
     clicked_letters = "";
     let clicked = document.getElementById("clicked_letters");
     clicked.innerText = clicked_letters;
@@ -209,6 +236,7 @@ function reset_game() {
     tile_lives.innerText = "";
     hide_hangman_tiles();
     render_lives();
+    render_word(mainWord);
     game_is_over = false;
     sec = 0;
   
